@@ -36,6 +36,10 @@
                 android:background="@color/white"
                 android:padding="15dp"
                 android:hint="@string/email"
+                android:textColor="@android:color/white"
+                android:textColorHint="Aandroid:color/white"
+                android:background="@drawable/edittext_background"
+                android:padding="15dp"
                 android:id="@+id/email_login"
                 />
             <EditText
@@ -45,6 +49,11 @@
                 android:padding="15dp"
                 android:background="@color/white"
                 android:hint="@string/password"
+                android:textColor="@android:color/white"
+                android:textColorHint="Aandroid:color/white"
+                android:background="@drawable/edittext_background"
+                android:padding="15dp"
+                android:inputType="textPassword"
                 android:id="@+id/password_login"
                 />
             <Button
@@ -52,6 +61,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/log_in"
+                android:textColor="@android:color/white"
+                android:textColorHint="android:color/white"
+                android:background="@drawable/edittext_background"
+                android:padding="15dp"
                 android:id="@+id/btn_login"
                 android:backgroundTint="@color/login"
                 android:textAppearance="?android:textAppearanceMedium"
