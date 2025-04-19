@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/log_in"
+                android:text="@string/Sign_In"
                 android:textColor="@color/white"
                 android:textSize="35sp"
                 android:textAppearance="?android:textAppearanceLarge"
