@@ -11,4 +11,5 @@
     <string name="title_Register">Register</string>
     <string name="Sign_Up">Sign Up</string>
     <string name="Already_have_an_account_sign_in">Already have an account? Sign In</string>
+    <string name="title_activity_reset">ResetActivity</string>
 </resources>

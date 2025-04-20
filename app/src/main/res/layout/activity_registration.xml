@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:id="@+id/signup_reg"
+                android:id="@+id/signin_reg"
                 android:textColor="@color/white"
                 android:text="@string/Already_have_an_account_sign_in"
                 android:padding="5dp"
