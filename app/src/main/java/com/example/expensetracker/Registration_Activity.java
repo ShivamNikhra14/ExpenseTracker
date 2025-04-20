@@ -51,12 +51,12 @@ public class Registration_Activity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(pass)){
                     mPass.setError("Password Required!!");
-
+                    return;
                 }
 
                 if(TextUtils.isEmpty(cnfpass)){
                     mCnfPass.setError("Confirm your Password!!");
-
+                    return;
                 }
 
 
