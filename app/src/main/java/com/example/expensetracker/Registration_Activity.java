@@ -78,6 +78,7 @@ public class Registration_Activity extends AppCompatActivity {
                 }
 
                 mDailog.setMessage("Registering User...");
+                mDailog.show();
 
                 mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
