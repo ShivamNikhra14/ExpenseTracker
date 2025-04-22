@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!-- Main navigation items -->
     <item
         android:id="@+id/dashboard"
         android:title="@string/dashboard"
         android:icon="@drawable/dashboard"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" /> <!-- Ensure this item appears if space allows -->
 
     <item
         android:id="@+id/income"
@@ -17,8 +14,7 @@
 
     <item
         android:id="@+id/expense"
-        android:title="@string/expense"
         android:icon="@drawable/expense"
-        app:showAsAction="ifRoom" />
-
+        android:title="@string/expense"
+        app:showAsAction="ifRoom" /> <!-- Use ifRoom to allow the item in ActionBar if space permits -->
 </menu>
