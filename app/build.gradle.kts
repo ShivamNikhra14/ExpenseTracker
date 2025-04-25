@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.example.expensetracker"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.expensetracker"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -30,8 +30,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
         isCoreLibraryDesugaringEnabled = true
     }
     buildFeatures {
@@ -45,12 +45,12 @@ android {
 
 dependencies {
 
-    implementation ("com.google.firebase:firebase-database:21.0.0")
-    implementation("com.google.firebase:firebase-auth:23.2.0")
-    implementation("com.google.firebase:firebase-core:21.1.1")
-    implementation("com.firebaseui:firebase-ui-database:8.0.2")
-    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation (libs.firebase.database)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.core)
+    implementation(libs.firebase.ui.database)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -71,5 +71,5 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }

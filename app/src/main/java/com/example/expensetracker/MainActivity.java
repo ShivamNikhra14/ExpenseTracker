@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
+        if(mAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(),Home_Activity.class));
+        }
+
         mDailog=new AlertDialog.Builder(this).create();
 
         LoginDetails();
