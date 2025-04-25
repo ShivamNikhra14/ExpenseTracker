@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+
         mAuth=FirebaseAuth.getInstance();
 
         mDailog=new AlertDialog.Builder(this).create();

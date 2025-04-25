@@ -16,4 +16,6 @@
     <string name="expense">Expense</string>
     <string name="dashboard">Dashboard</string>
     <string name="expense_tracker">Expense Tracker</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
