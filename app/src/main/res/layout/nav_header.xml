@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:theme="@style/Base.Theme.ExpenseTracker"
     android:layout_height="200dp"
-    android:background="@android:color/holo_blue_dark">
+    android:background="@drawable/background_color">
     
     <TextView
         android:layout_width="match_parent"

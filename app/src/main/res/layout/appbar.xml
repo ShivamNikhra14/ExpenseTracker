@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/my_toolbar"
         app:titleTextColor="@android:color/white"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@drawable/background_color"
         android:fitsSystemWindows="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
