@@ -22,4 +22,9 @@
     <string name="dashboard_fragment">Dashboard</string>
     <string name="income_fragment">Income</string>
     <string name="expense_fragment">Expense</string>
+    <string name="amount">AMOUNT:</string>
+    <string name="type">TYPE:</string>
+    <string name="note">NOTE:</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>
