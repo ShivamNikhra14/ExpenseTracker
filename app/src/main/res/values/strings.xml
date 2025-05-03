@@ -27,4 +27,6 @@
     <string name="note">NOTE:</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="income_label">Income</string>
+    <string name="income_amount">00000.00</string>
 </resources>

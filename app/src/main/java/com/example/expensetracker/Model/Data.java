@@ -6,7 +6,7 @@ public class Data {
     private String type;
     private String note;
     private String id;
-    private String data;
+    private String date;
 
     // Required empty constructor for Firebase
     public Data() {}
@@ -16,7 +16,7 @@ public class Data {
         this.type = type;
         this.note = note;
         this.id = id;
-        this.data = data;
+        this.date = date;
     }
 
     // Getters
@@ -36,8 +36,8 @@ public class Data {
         return id;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
     // Setters
@@ -57,7 +57,7 @@ public class Data {
         this.id = id;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String date) {
+        this.date = date;
     }
 }

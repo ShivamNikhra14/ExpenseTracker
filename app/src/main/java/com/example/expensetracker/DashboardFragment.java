@@ -58,9 +58,11 @@ public class DashboardFragment extends Fragment {
         }
         String uid = mUser.getUid();
 
-        mIncomeDatabase = FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
-        mExpenseDatabase=FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
+        mIncomeDatabase = FirebaseDatabase.getInstance("https://expanse-tracker-ef207-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference().child("IncomeData").child(uid);
 
+        mExpenseDatabase = FirebaseDatabase.getInstance("https://expanse-tracker-ef207-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference().child("ExpenseData").child(uid);
         fab_main_btn=myview.findViewById(R.id.fb_main_plus_btn);
         fab_income_btn=myview.findViewById(R.id.income_ft_btn);
         fab_expense_btn=myview.findViewById(R.id.expense_ft_btn);
@@ -178,7 +180,6 @@ public class DashboardFragment extends Fragment {
 
                 Log.d("DEBUG", "Save button clicked");
                 Log.d("DEBUG", "Database URL: " + FirebaseDatabase.getInstance().getReference().toString());
-                mIncomeDatabase.child("test").setValue("Hello world!");
 
                 String type=edtType.getText().toString().trim();
                 String amount=edtAmount.getText().toString().trim();
@@ -215,15 +216,21 @@ public class DashboardFragment extends Fragment {
                 Data data=new Data(ourAmountInt,type,note,id,mDate);
 
                 assert id != null;
-                mIncomeDatabase.child(id).setValue(data).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d("DEBUG", "Data added successfully");
-                        Toast.makeText(getActivity(), "Data Added", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.e("ERROR", "Error adding data: " + task.getException().getMessage());
-                        Toast.makeText(getActivity(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                mIncomeDatabase.child(id).setValue(data)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Log.d("DEBUG", "Data added successfully");
+                                Toast.makeText(getActivity(), "Data Added", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.e("ERROR", "Error adding data: " + task.getException().getMessage());
+                                Toast.makeText(getActivity(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("FIREBASE", "Failed to add data", e);
+                            Toast.makeText(getActivity(), "Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+
                 ftAnimation();
 
                 dialog.dismiss();
