@@ -255,7 +255,7 @@ public class DashboardFragment extends Fragment {
 
         EditText amount=myview.findViewById(R.id.amount_edt);
         EditText type=myview.findViewById(R.id.type_edt);
-        EditText note=myview.findViewById(r.id.note_edt);
+        EditText note=myview.findViewById(R.id.note_edt);
 
         Button btnSave=myview.findViewById(R.id.btnSave);
         Button btnCancel=myview.findViewById(R.id.btnCancel);
@@ -286,9 +286,10 @@ public class DashboardFragment extends Fragment {
                 }
 
                 String id=mExpenseDatabase.push().getKey();
-                String mDate=DateFormat.getDateInstance().format(new date());
+                String mDate=DateFormat.getDateInstance().format(new Date());
 
                 Data data=new Data(inamount,tmtype,tmnote,id,mDate);
+                assert id != null;
                 mExpenseDatabase.child(id).setValue(data);
 
                 Toast.makeText(getActivity(),"Data added",Toast.LENGTH_SHORT).show();
