@@ -59,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/amount"
+                android:textColor="@android:color/holo_red_dark"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:id="@+id/amount_txt_expense"/>
 

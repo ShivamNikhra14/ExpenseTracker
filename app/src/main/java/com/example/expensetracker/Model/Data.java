@@ -11,7 +11,7 @@ public class Data {
     // Required empty constructor for Firebase
     public Data() {}
 
-    public Data(int amount, String type, String note, String id, String data) {
+    public Data(int amount, String type, String note, String id, String date) {
         this.amount = amount;
         this.type = type;
         this.note = note;
