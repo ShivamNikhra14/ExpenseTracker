@@ -1,5 +1,6 @@
 package com.example.expensetracker;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.expensetracker.Model.Data;
@@ -110,21 +113,22 @@ public class IncomeFragment extends Fragment {
                 holder.setNote(model.getNote());
                 holder.setDate(model.getDate());
 
-                ViewHolder.myview.setOnClickListener(new View.OnClickListener(){
+                final int adapterPosition = position; // Make a final copy
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view){
+                    public void onClick(View view) {
+                        post_key = getRef(adapterPosition).getKey();
 
-                        post_key=getRef(position).getKey();
-
-                        type=model.getType();
-                        note=mode.getNote();
-                        amount=model.getAmount();
+                        type = model.getType();
+                        note = model.getNote();
+                        amount = model.getAmount();
 
                         updateDataItem();
                     }
                 });
-
             }
+
 
             @NonNull
             @Override
@@ -141,33 +145,38 @@ public class IncomeFragment extends Fragment {
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        View mView;
+        private final View mView;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            mView=itemView;
+            mView = itemView;
+        }
+
+        public View getView() {
+            return mView;
         }
 
         private void setType(String type){
-           TextView mType=mView.findViewById(R.id.type_txt_income);
-           mType.setText(type);
-
+            TextView mType = mView.findViewById(R.id.type_txt_income);
+            mType.setText(type);
         }
+
         private void setAmount(int amount){
-            TextView mAmount=mView.findViewById(R.id.amount_txt_income);
+            TextView mAmount = mView.findViewById(R.id.amount_txt_income);
             mAmount.setText(String.valueOf(amount));
         }
+
         private void setNote(String note){
-            TextView mNote=mView.findViewById(R.id.note_txt_income);
+            TextView mNote = mView.findViewById(R.id.note_txt_income);
             mNote.setText(note);
         }
 
         private void setDate(String date){
-            TextView mDate=mView.findViewById(R.id.date_txt_income);
+            TextView mDate = mView.findViewById(R.id.date_txt_income);
             mDate.setText(date);
         }
-
-
     }
+
 
     private void updateDataItem(){
         AlertDialog.Builder mydialog=new AlertDialog.Builder(getActivity());
@@ -189,22 +198,22 @@ public class IncomeFragment extends Fragment {
 
         edtAmount.setText(String.valueOf(amount));
         edtAmount.setSelection(String.valueOf(amount).length());
-        
 
 
-        btnUpdate=myview.findViewById(R.id.btn_upd_update);
+
+        btnUpdate=myview.findViewById(R.id.btn_upd_Update);
         btnDelete=myview.findViewById(R.id.btn_upd_Delete);
 
         AlertDialog dialog=mydialog.create();
 
-        btnUpdate.setOnClickListener(new view.OnClickListener(){
+        btnUpdate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                
+
             }
         });
 
-        btnDelete.setOnClickListener(new view.OnClickListener(){
+        btnDelete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 dialog.dismiss();
