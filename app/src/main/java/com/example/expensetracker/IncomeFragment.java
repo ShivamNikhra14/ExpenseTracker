@@ -32,6 +32,23 @@ public class IncomeFragment extends Fragment {
 
     private TextView incomeTotalSum;
 
+    ///Update edit text.
+    private EditText edtAmount;
+    private EditText edtType;
+    private EditText edtNote;
+
+    //button for update and delete.
+
+    private Button btnUpdate;
+    private Button btnDelete;
+
+    //Data item value
+
+    private String type;
+    private String note;
+    private int amount;
+
+    private String post_key;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +109,21 @@ public class IncomeFragment extends Fragment {
                 holder.setAmount(model.getAmount());
                 holder.setNote(model.getNote());
                 holder.setDate(model.getDate());
+
+                ViewHolder.myview.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+
+                        post_key=getRef(position).getKey();
+
+                        type=model.getType();
+                        note=mode.getNote();
+                        amount=model.getAmount();
+
+                        updateDataItem();
+                    }
+                });
+
             }
 
             @NonNull
@@ -134,6 +166,52 @@ public class IncomeFragment extends Fragment {
             mDate.setText(date);
         }
 
+
+    }
+
+    private void updateDataItem(){
+        AlertDialog.Builder mydialog=new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater=LayoutInflater.from(getActivity());
+        View myview=inflater.inflate(R.layout.update_data_item,null);
+        mydialog.setView(myview);
+
+        edtAmount=myview.findViewById(R.id.amount_edt);
+        edtType=myview.findViewById(R.id.type_edt);
+        edtNote=myview.findViewById(R.id.note_edt);
+
+        //Set data to edit text..
+
+        edtType.setText(type);
+        edtType.setSelection(type.length());
+
+        edtNote.setText(note);
+        edtNote.setSelection(note.length());
+
+        edtAmount.setText(String.valueOf(amount));
+        edtAmount.setSelection(String.valueOf(amount).length());
+        
+
+
+        btnUpdate=myview.findViewById(R.id.btn_upd_update);
+        btnDelete=myview.findViewById(R.id.btn_upd_Delete);
+
+        AlertDialog dialog=mydialog.create();
+
+        btnUpdate.setOnClickListener(new view.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                
+            }
+        });
+
+        btnDelete.setOnClickListener(new view.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
 
     }
 
