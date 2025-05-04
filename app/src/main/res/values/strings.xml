@@ -29,4 +29,5 @@
     <string name="save">Save</string>
     <string name="income_label">Income</string>
     <string name="income_amount">00000.00</string>
+    <string name="dummy_date">04 May 2025</string>
 </resources>
