@@ -26,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 
 public class IncomeFragment extends Fragment {
 
@@ -210,12 +213,28 @@ public class IncomeFragment extends Fragment {
             @Override
             public void onClick(View view){
 
+                type=edtType.getText().toString().trim();
+                note=edtNote.getText().toString().trim();
+
+                String mdamount=String.valueOf(amount);
+                mdamount=edtAmount.getText().toString().trim();
+
+                int myamount=Integer.parseInt(mdamount);
+
+                String mDate= DateFormat.getDateInstance().format(new Date());
+                Data data=new Data(myamount,type,note,post_key,mDate);
+
+                mIncomeDatabase.child(post_key).setValue(data);
+                dialog.dismiss();
+
             }
         });
 
         btnDelete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+
+                mIncomeDatabase.child(post_key).removeValue();
                 dialog.dismiss();
             }
         });
