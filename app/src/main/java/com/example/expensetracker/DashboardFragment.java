@@ -3,7 +3,10 @@ package com.example.expensetracker;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.DocumentsContract;
 import android.text.TextUtils;
@@ -22,8 +25,11 @@ import com.example.expensetracker.Model.Data;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -41,9 +47,14 @@ public class DashboardFragment extends Fragment {
 
     private Animation FadeOpen, FadeClose;
 
+    private TextView totalIncomeResult;
+    private TextView totalExpenseResult;
     private FirebaseAuth mAuth;
     private DatabaseReference mIncomeDatabase;
     private DatabaseReference mExpenseDatabase;
+
+    private RecyclerView mRecyclerIncome;
+    private RecyclerView mRecyclerExpense;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -69,6 +80,13 @@ public class DashboardFragment extends Fragment {
 
         fab_income_text=myview.findViewById(R.id.income_ft_text);
         fab_expense_text=myview.findViewById(R.id.expense_ft_text);
+
+        totalIncomeResult=myview.findViewById(R.id.income_set_result);
+        totalExpenseResult=myview.findViewById(R.id.expense_set_result);
+
+        mRecyclerIncome = myview.findViewById(R.id.recycler_income);
+        mRecyclerExpense = myview.findViewById(R.id.recycler_expense);
+
 
         FadeOpen = AnimationUtils.loadAnimation(getActivity(),R.anim.fade_open);
         FadeClose = AnimationUtils.loadAnimation(getActivity(),R.anim.fade_close);
@@ -103,6 +121,69 @@ public class DashboardFragment extends Fragment {
                 }
             }
         });
+
+        mIncomeDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                int totalsum = 0;
+
+                for(DataSnapshot mysnap: snapshot.getChildren()){
+
+                    Data data = mysnap.getValue(Data.class);
+
+                    assert data != null;
+                    totalsum+=data.getAmount();
+
+                    String stResult = String.valueOf(totalsum);
+
+                    totalIncomeResult.setText(stResult);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mExpenseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int totalsum=0;
+                for(DataSnapshot mysnap: snapshot.getChildren()){
+                    Data data = mysnap.getValue(Data.class);
+
+                    assert data != null;
+                    totalsum+=data.getAmount();
+
+                    String stResult = String.valueOf(totalsum);
+
+                    totalExpenseResult.setText(stResult);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        LinearLayoutManager layoutManagerIncome = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+
+        layoutManagerIncome.setStackFromEnd(true);
+        layoutManagerIncome.setReverseLayout(true);
+        mRecyclerIncome.setHasFixedSize(true);
+        mRecyclerIncome.setLayoutManager(layoutManagerIncome);
+
+        LinearLayoutManager layoutManagerExpense = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+
+        layoutManagerExpense.setStackFromEnd(true);
+        layoutManagerExpense.setReverseLayout(true);
+        mRecyclerExpense.setHasFixedSize(true);
+        mRecyclerExpense.setLayoutManager(layoutManagerExpense);
+
 
         return myview;
     }
