@@ -170,6 +170,9 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+        //Recycler
+        
+
         LinearLayoutManager layoutManagerIncome = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
 
         layoutManagerIncome.setStackFromEnd(true);
@@ -398,6 +401,104 @@ public class DashboardFragment extends Fragment {
         });
 
         dialog.show();
+
+
+    }
+
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        FirebaseRecyclerAdapter<Data,IncomeViewHolder>incomeAdapter=new FirebaseRecyclerAdapter<Data, IncomeViewHolder>
+        (
+            Data.class,
+            R.layout.dashboard_income,
+            DashboardFragment.IncomeViewHolder.class,
+            mIncomeDatabase
+        ){
+            @Override
+            protected void populateViewHolder(IncomeViewHolder viewHolder,Data model, int position){
+                viewHolder.setIncometype(model.getType());
+                viewHolder.setIncomeAmmount(model.getAmount());
+                viewHolder.setIncomedate(model.getDate());
+            }
+        };
+
+        mRecyclerIncome.setAdapter(incomeAdapter);
+
+        FirebaseRecyclerAdapter<Data,ExpenseViewHolder>expenseAdapter=new FirebaseRecyclerAdapter<Data, ExpenseViewHolder>
+        (
+            data.class,
+            R.layout.dashboard_expense,
+            DashboardFragment.ExpenseViewHolder.class,
+            mExpenseDatabase
+        ){
+            @Override
+            protected void populateViewHolder(ExpenseViewHolder viewHolder,Data model,int position){
+                viewHolder.setExpenseType(model.getType());
+                viewHolder.setExpenseAmmount(model.getAmount());
+                viewHolder.setExpenseDate(model.getDate());
+            }
+        };
+
+        mRecyclerExpense.setAdapter(expenseAdapter);
+    }
+
+
+    //For Income data
+
+    public static class IncomeViewHolder extend RecyclerView.ViewHolder{
+        View mIncomeView;
+
+        public IncomeViewHolder(View itemView){
+            super(itemView);
+            mIncomeView=itemView;
+        }
+
+        public void setIncometype(String type){
+            TextView mtype=mIncomeView.findViewById(R.id.type_income_ds);
+            mtype.setText(type);
+        }
+
+        public void setIncomeAmmount(int ammount){
+            TextView mAmmount=mIncomeView.findViewById(R.id.ammount_income_ds);
+            String strAmmount=String.valueOf(ammount);
+            mAmmount.setText(strAmmount);
+        }
+
+        public void setIncomedate(String date){
+            TextView mDate=mIncomeView.findViewById(R.id.date_income_ds)
+            mDate.setText(date);
+        }
+
+    }
+
+    //For expense data
+
+    public static class ExpenseViewHolder extends RecyclerView.viewHolder{
+        View mExpenseView;
+
+        public ExpenseViewHolder(View itemView){
+            super(itemView);
+            mExpenseView=itemView;
+        }
+
+        public void setExpenseType(String type){
+            TextView mtype=mExpenseView.findViewById(R.id.type_expense_ds);
+            mtype.setText(type);
+        }
+
+        public void setExpenseAmmount(int ammount){
+            TextView mAmmount=mExpenseView.findViewById(R.id.ammount_expense_ds);
+            String strAmmount=String,valueOf(ammount);
+            mAmmount.setText(ammount);
+        }
+
+        public void setExpenseDate(String date){
+            TextView mDate=mExpenseView.findViewById(R.id.date_expense_ds);
+            mDate.setText(date);
+        }
 
 
     }
